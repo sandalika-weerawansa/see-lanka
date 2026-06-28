@@ -97,7 +97,7 @@ function injectFooter() {
         <div class="footer-col">
           <h4>Company</h4>
           <ul>
-            <li><a href="profile.html">About Us</a></li>
+            <li><a href="index.html">About Us</a></li>
             <li><a href="explore.html">Sustainability</a></li>
           </ul>
         </div>
