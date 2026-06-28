@@ -83,7 +83,7 @@ function injectFooter() {
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
-          <img src="assets/logo.png" alt="See Lanka" class="footer-logo">
+          <img src="assets/logo_bw.png" alt="See Lanka" class="footer-logo">
           <p class="footer-desc">
             Your ultimate companion for seamless travel planning, budget tracking, and discovering hidden gems around the globe.
           </p>
