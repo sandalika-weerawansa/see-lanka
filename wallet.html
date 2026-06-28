@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traveler Wallet - Budget & Expense Tracker</title>
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    /* Wallet Specific Layouts */
+    .wallet-header {
+      margin: 40px 0 30px;
+    }
+    
+    .wallet-header h1 {
+      font-size: 2.25rem;
+      margin-bottom: 6px;
+    }
+    
+    .wallet-header p {
+      font-size: 1rem;
+      color: var(--text-light);
+    }
+    
+    /* Budget Summary Box */
+    .budget-summary-box {
+      background-color: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .budget-summary-left {
+      padding-right: 40px;
+      border-right: 1px solid var(--border-light);
+    }
+    
+    .budget-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    
+    .budget-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 24px;
+      line-height: 1;
+    }
+    
+    .budget-progress-container {
+      width: 100%;
+      height: 10px;
+      background-color: var(--bg-tertiary);
+      border-radius: var(--radius-full);
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    
+    .budget-progress-bar {
+      height: 100%;
+      background-color: var(--primary);
+      width: 0%; /* Dynamic fill */
+      border-radius: var(--radius-full);
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .budget-progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+    
+    .budget-summary-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .saving-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    
+    .saving-desc {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+    
+    /* Category progress bars */
+    .category-spending-card {
+      background-color: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+    }
+    
+    .category-spending-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    
+    .category-spending-card-header h3 {
+      font-size: 1.25rem;
+    }
+    
+    .category-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .category-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .category-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    
+    .category-icon-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .category-icon-wrapper {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background-color: var(--bg-tertiary);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    .category-bar-bg {
+      width: 100%;
+      height: 6px;
+      background-color: var(--bg-tertiary);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    
+    .category-bar-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      width: 0%; /* Dynamic fill */
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Stacked cards on right column */
+    .wallet-insight-card {
+      background-color: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      margin-bottom: 20px;
+    }
+    
+    .insight-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .wallet-insight-card h4 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+    
+    .wallet-insight-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    
+    /* Quick Converter widget */
+    .quick-converter-card {
+      background-color: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+    }
+    
+    .quick-converter-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+    }
+    
+    .converter-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    
+    .converter-input-box {
+      flex-grow: 1;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      background-color: var(--bg-primary);
+    }
+    
+    .converter-input-box span {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+    }
+    
+    .converter-input-box input {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      width: 100%;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+    
+    .converter-swap-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    
+    .converter-swap-btn:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: rotate(180deg);
+    }
+    
+    .converter-update-time {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      text-align: right;
+    }
+    
+    /* Recent Travel Expenses */
+    .expenses-section {
+      background-color: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+      margin-top: 40px;
+      margin-bottom: 80px;
+    }
+    
+    .expenses-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    
+    .expenses-header h2 {
+      font-size: 1.5rem;
+    }
+    
+    .expenses-table-header {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 100px;
+      padding: 10px 24px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 16px;
+    }
+    
+    .expenses-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .expense-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 100px;
+      align-items: center;
+      padding: 16px 24px;
+      background-color: var(--bg-primary);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-normal);
+    }
+    
+    .expense-row:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-dark);
+    }
+    
+    .expense-desc-col {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .expense-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    
+    .expense-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+    
+    .expense-date {
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+    
+    .expense-category-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+    
+    .badge-accommodation { background-color: #dbeafe; color: #1e40af; }
+    .badge-transport { background-color: #ecfeff; color: #0891b2; }
+    .badge-entrance { background-color: #ffeedb; color: #ff7a00; }
+    .badge-dining { background-color: #ccfbf1; color: #0f766e; }
+    .badge-activity { background-color: #f3e8ff; color: #7e22ce; }
+    
+    .expense-amount-col {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    
+    .expense-amount-col span.est {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      font-weight: 500;
+      margin-left: 4px;
+    }
+    
+    .expense-actions-col {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+    
+    .action-icon-btn {
+      color: var(--text-light);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    
+    .action-icon-btn:hover {
+      color: var(--text-main);
+    }
+    
+    .action-delete-btn:hover {
+      color: #ef4444;
+    }
+    
+    @media (max-width: 1024px) {
+      .budget-summary-box {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .budget-summary-left {
+        border-right: none;
+        padding-right: 0;
+      }
+    }
+    
+    @media (max-width: 900px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .expenses-table-header {
+        display: none;
+      }
+      .expense-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 16px;
+      }
+      .expense-actions-col {
+        justify-content: flex-start;
+        border-top: 1px solid var(--border-light);
+        padding-top: 12px;
+        margin-top: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Injected Header -->
+  <header></header>
+
+  <div class="container">
+    <div class="wallet-header">
+      <h1>Traveler Wallet</h1>
+      <p>Manage your adventure budget for Sri Lanka in real-time.</p>
+    </div>
+
+    <!-- Budget summary card -->
+    <div class="budget-summary-box">
+      <div class="budget-summary-left">
+        <div class="budget-label">Total Trip Budget</div>
+        <div class="budget-value" id="budget-total-text">1,500,000.00 LKR</div>
+        <div class="budget-progress-container">
+          <div class="budget-progress-bar" id="budget-progress-fill"></div>
+        </div>
+        <div class="budget-progress-labels">
+          <span id="budget-spent-text">Spent: 870,000.00 LKR</span>
+          <span id="budget-remaining-text">Remaining: 630,000.00 LKR</span>
+        </div>
+      </div>
+      <div class="budget-summary-right">
+        <div class="budget-label">Projected Saving</div>
+        <div class="saving-val" id="budget-saving-text">75,000.00 LKR</div>
+        <div class="saving-desc">5% Under Initial Estimate</div>
+      </div>
+    </div>
+
+    <!-- Middle section grid -->
+    <div class="grid-2">
+      <!-- Left side: Category breakdown card -->
+      <div class="category-spending-card">
+        <div class="category-spending-card-header">
+          <h3>Spending by Category</h3>
+          <button class="icon-btn" style="color: var(--text-light);"><i data-lucide="more-horizontal"></i></button>
+        </div>
+        
+        <div class="category-list">
+          <!-- Item 1 -->
+          <div class="category-item" data-category="accommodation">
+            <div class="category-item-header">
+              <div class="category-icon-label">
+                <div class="category-icon-wrapper flex-center"><i data-lucide="home"></i></div>
+                <span>Accommodation</span>
+              </div>
+              <span class="category-val">0 LKR / 675,000 LKR (45%)</span>
+            </div>
+            <div class="category-bar-bg">
+              <div class="category-bar-fill" style="background-color: var(--primary);"></div>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="category-item" data-category="transport">
+            <div class="category-item-header">
+              <div class="category-icon-label">
+                <div class="category-icon-wrapper flex-center"><i data-lucide="car"></i></div>
+                <span>Local Transport (Tuk-Tuks)</span>
+              </div>
+              <span class="category-val">0 LKR / 225,000 LKR (15%)</span>
+            </div>
+            <div class="category-bar-bg">
+              <div class="category-bar-fill" style="background-color: var(--info);"></div>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="category-item" data-category="entrance">
+            <div class="category-item-header">
+              <div class="category-icon-label">
+                <div class="category-icon-wrapper flex-center"><i data-lucide="landmark"></i></div>
+                <span>Cultural Entrance Fees</span>
+              </div>
+              <span class="category-val">0 LKR / 300,000 LKR (20%)</span>
+            </div>
+            <div class="category-bar-bg">
+              <div class="category-bar-fill" style="background-color: var(--warning);"></div>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="category-item" data-category="dining">
+            <div class="category-item-header">
+              <div class="category-icon-label">
+                <div class="category-icon-wrapper flex-center"><i data-lucide="utensils"></i></div>
+                <span>Dining</span>
+              </div>
+              <span class="category-val">0 LKR / 300,000 LKR (20%)</span>
+            </div>
+            <div class="category-bar-bg">
+              <div class="category-bar-fill" style="background-color: var(--success);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side: Insight & Quick Converter stack -->
+      <div>
+        <!-- Insight Card -->
+        <div class="wallet-insight-card">
+          <div class="insight-title">
+            <i data-lucide="lightbulb" style="width: 16px; height: 16px;"></i>
+            <span>Intelligent Insight</span>
+          </div>
+          <h4>Advance Rail Booking</h4>
+          <p>Booking your train tickets to Ella via the government portal 30 days in advance can save you 40% compared to last-minute private transfers.</p>
+        </div>
+
+        <!-- Quick Converter -->
+        <div class="quick-converter-card">
+          <h3>Quick Converter</h3>
+          <div class="converter-row">
+            <!-- Box 1 -->
+            <div class="converter-input-box" id="conv-from-box">
+              <span id="conv-from-lbl">From USD</span>
+              <input type="number" id="conv-input-from" value="1.00" step="any">
+            </div>
+            
+            <!-- Swap -->
+            <button class="converter-swap-btn flex-center" id="conv-swap-btn">
+              <i data-lucide="arrow-left-right" style="width: 16px; height: 16px;"></i>
+            </button>
+            
+            <!-- Box 2 -->
+            <div class="converter-input-box" id="conv-to-box">
+              <span id="conv-to-lbl">To LKR</span>
+              <input type="number" id="conv-input-to" value="291.50" step="any" readonly>
+            </div>
+          </div>
+          <div class="converter-update-time">Updated 5 minutes ago</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Expenses Table list -->
+    <section class="expenses-section">
+      <div class="expenses-header">
+        <h2>Recent Travel Expenses</h2>
+        <button class="btn btn-primary" id="add-expense-btn">
+          <i data-lucide="plus"></i> Add Transaction
+        </button>
+      </div>
+
+      <div class="expenses-table-header">
+        <span>Description</span>
+        <span>Category</span>
+        <span>Amount</span>
+        <span style="text-align: right;">Actions</span>
+      </div>
+
+      <div class="expenses-list" id="expense-list-container">
+        <!-- Item 1: Cinnamon Lodge -->
+        <div class="expense-row" data-id="1" data-category="accommodation" data-val="450000">
+          <div class="expense-desc-col">
+            <img src="https://images.unsplash.com/photo-1546548970-71785318a17b?auto=format&fit=crop&w=100&q=80" alt="Cinnamon Lodge" class="expense-img">
+            <div>
+              <div class="expense-title">Cinnamon Lodge Habarana</div>
+              <div class="expense-date">Nov 12 - Nov 15</div>
+            </div>
+          </div>
+          <div>
+            <span class="expense-category-badge badge-accommodation">Hotel</span>
+          </div>
+          <div class="expense-amount-col">
+            450,000 LKR
+          </div>
+          <div class="expense-actions-col">
+            <i data-lucide="edit-3" class="action-icon-btn action-edit-btn" style="width: 18px; height: 18px;"></i>
+            <i data-lucide="trash-2" class="action-icon-btn action-delete-btn" style="width: 18px; height: 18px;"></i>
+          </div>
+        </div>
+
+        <!-- Item 2: Ministry of Crab -->
+        <div class="expense-row" data-id="2" data-category="dining" data-val="200000">
+          <div class="expense-desc-col">
+            <img src="assets/sri_lankan_lunch.png" alt="Ministry of Crab" class="expense-img">
+            <div>
+              <div class="expense-title">Ministry of Crab, Colombo</div>
+              <div class="expense-date">Nov 14</div>
+            </div>
+          </div>
+          <div>
+            <span class="expense-category-badge badge-dining">Dining</span>
+          </div>
+          <div class="expense-amount-col">
+            200,000 LKR
+          </div>
+          <div class="expense-actions-col">
+            <i data-lucide="edit-3" class="action-icon-btn action-edit-btn" style="width: 18px; height: 18px;"></i>
+            <i data-lucide="trash-2" class="action-icon-btn action-delete-btn" style="width: 18px; height: 18px;"></i>
+          </div>
+        </div>
+
+        <!-- Item 3: Local Tuk Tuk transport -->
+        <div class="expense-row" data-id="3" data-category="transport" data-val="120000">
+          <div class="expense-desc-col">
+            <img src="assets/electric_tuktuk.png" alt="Local Transfers" class="expense-img">
+            <div>
+              <div class="expense-title">Local Transport (Tuk-Tuk Safari)</div>
+              <div class="expense-date">Nov 12 - Nov 16</div>
+            </div>
+          </div>
+          <div>
+            <span class="expense-category-badge badge-transport">Transport</span>
+          </div>
+          <div class="expense-amount-col">
+            120,000 LKR
+          </div>
+          <div class="expense-actions-col">
+            <i data-lucide="edit-3" class="action-icon-btn action-edit-btn" style="width: 18px; height: 18px;"></i>
+            <i data-lucide="trash-2" class="action-icon-btn action-delete-btn" style="width: 18px; height: 18px;"></i>
+          </div>
+        </div>
+
+        <!-- Item 4: Sigiriya entrance tickets -->
+        <div class="expense-row" data-id="4" data-category="entrance" data-val="100000">
+          <div class="expense-desc-col">
+            <img src="assets/sigiriya_sunrise.png" alt="Sigiriya Entrance" class="expense-img">
+            <div>
+              <div class="expense-title">Sigiriya Heritage Entry Tickets</div>
+              <div class="expense-date">Nov 13</div>
+            </div>
+          </div>
+          <div>
+            <span class="expense-category-badge badge-entrance">Entrance</span>
+          </div>
+          <div class="expense-amount-col">
+            100,000 LKR
+          </div>
+          <div class="expense-actions-col">
+            <i data-lucide="edit-3" class="action-icon-btn action-edit-btn" style="width: 18px; height: 18px;"></i>
+            <i data-lucide="trash-2" class="action-icon-btn action-delete-btn" style="width: 18px; height: 18px;"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Injected Footer -->
+  <footer></footer>
+
+  <!-- Shared Scripts -->
+  <script src="js/shared.js"></script>
+  
+  <script>
+    /* ==========================================================================
+       Wallet Specific Client Side Interactive Functionality
+       ========================================================================== */
+    document.addEventListener("DOMContentLoaded", () => {
+      initWallet();
+    });
+
+    function initWallet() {
+      // 1. Quick Converter Functionality
+      const convInputFrom = document.getElementById("conv-input-from");
+      const convInputTo = document.getElementById("conv-input-to");
+      const convSwapBtn = document.getElementById("conv-swap-btn");
+      const convFromLbl = document.getElementById("conv-from-lbl");
+      const convToLbl = document.getElementById("conv-to-lbl");
+
+      const rate = 291.50;
+      let isUsdToLkr = true;
+
+      const calculateConversion = () => {
+        const val = parseFloat(convInputFrom.value) || 0;
+        if (isUsdToLkr) {
+          convInputTo.value = (val * rate).toFixed(2);
+        } else {
+          convInputTo.value = (val / rate).toFixed(2);
+        }
+      };
+
+      if (convInputFrom) {
+        convInputFrom.addEventListener("input", calculateConversion);
+      }
+
+      if (convSwapBtn) {
+        convSwapBtn.addEventListener("click", () => {
+          isUsdToLkr = !isUsdToLkr;
+          if (isUsdToLkr) {
+            convFromLbl.textContent = "From USD";
+            convToLbl.textContent = "To LKR";
+          } else {
+            convFromLbl.textContent = "From LKR";
+            convToLbl.textContent = "To USD";
+          }
+          const tempVal = convInputFrom.value;
+          convInputFrom.value = convInputTo.value;
+          convInputTo.value = tempVal;
+          calculateConversion();
+        });
+      }
+
+      // 2. Budget Recalculations and Dynamic Updating
+      const totalBudget = 1500000;
+      
+      const catLimits = {
+        accommodation: 675000,
+        transport: 225000,
+        entrance: 300000,
+        dining: 300000,
+        activity: 100000
+      };
+
+      const spentFill = document.getElementById("budget-progress-fill");
+      const spentText = document.getElementById("budget-spent-text");
+      const remainingText = document.getElementById("budget-remaining-text");
+      const savingText = document.getElementById("budget-saving-text");
+      
+      const categoryItems = document.querySelectorAll(".category-item");
+
+      const formatNumber = (num) => {
+        return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      };
+
+      const recalculateBudget = () => {
+        let totalSpent = 0;
+        
+        let customSpent = {
+          accommodation: 0,
+          transport: 0,
+          entrance: 0,
+          dining: 0,
+          activity: 0
+        };
+
+        const rows = document.querySelectorAll(".expense-row");
+        rows.forEach(row => {
+          const cat = row.getAttribute("data-category");
+          const val = parseFloat(row.getAttribute("data-val")) || 0;
+          totalSpent += val;
+          if (customSpent[cat] !== undefined) {
+            customSpent[cat] += val;
+          } else {
+            customSpent.activity += val;
+          }
+        });
+
+        // Update progress bar
+        const spentPercent = Math.min((totalSpent / totalBudget) * 100, 100);
+        if (spentFill) spentFill.style.width = `${spentPercent}%`;
+        
+        // Update labels
+        if (spentText) spentText.textContent = `Spent: ${formatNumber(totalSpent)} LKR`;
+        if (remainingText) remainingText.textContent = `Remaining: ${formatNumber(totalBudget - totalSpent)} LKR`;
+
+        // Update savings label
+        const saving = Math.max(0, (totalBudget - totalSpent) * 0.12);
+        if (savingText) savingText.textContent = `${formatNumber(saving)} LKR`;
+
+        // Update categories listing dynamically
+        categoryItems.forEach(item => {
+          const cat = item.getAttribute("data-category");
+          const currentVal = customSpent[cat] || 0;
+          const limit = catLimits[cat] || 100000;
+          
+          let percentSpentOfLimit = limit > 0 ? Math.min(Math.round((currentVal / limit) * 100), 100) : 0;
+          let limitPercentOfTotal = Math.round((limit / totalBudget) * 100);
+          
+          const valSpan = item.querySelector(".category-val");
+          const barFill = item.querySelector(".category-bar-fill");
+
+          if (valSpan) valSpan.textContent = `${currentVal.toLocaleString()} LKR / ${limit.toLocaleString()} LKR (${limitPercentOfTotal}%)`;
+          if (barFill) barFill.style.width = `${percentSpentOfLimit}%`;
+        });
+      };
+
+      // Recalculate initially based on initial hardcoded rows
+      recalculateBudget();
+
+      // 3. Delete expense functionality
+      const listContainer = document.getElementById("expense-list-container");
+      
+      if (listContainer) {
+        listContainer.addEventListener("click", (e) => {
+          const deleteBtn = e.target.closest(".action-delete-btn");
+          if (deleteBtn) {
+            const row = deleteBtn.closest(".expense-row");
+            if (row) {
+              row.style.opacity = "0";
+              row.style.transform = "scale(0.9)";
+              setTimeout(() => {
+                row.remove();
+                recalculateBudget();
+              }, 300);
+            }
+          }
+        });
+      }
+
+      // 4. Add Transaction Modal
+      const addExpenseBtn = document.getElementById("add-expense-btn");
+      let editRowId = null; // tracking edits
+
+      if (addExpenseBtn) {
+        addExpenseBtn.addEventListener("click", () => {
+          openExpenseModal();
+        });
+      }
+
+      // Edit click delegation
+      if (listContainer) {
+        listContainer.addEventListener("click", (e) => {
+          const editBtn = e.target.closest(".action-edit-btn");
+          if (editBtn) {
+            const row = editBtn.closest(".expense-row");
+            if (row) {
+              const id = row.getAttribute("data-id");
+              const category = row.getAttribute("data-category");
+              const val = row.getAttribute("data-val");
+              const title = row.querySelector(".expense-title").textContent;
+              const date = row.querySelector(".expense-date").textContent;
+
+              openExpenseModal(id, title, category, val, date);
+            }
+          }
+        });
+      }
+
+      const openExpenseModal = (id = null, title = "", category = "accommodation", val = "", date = "") => {
+        editRowId = id;
+        
+        // Build Overlay
+        const overlay = document.createElement("div");
+        overlay.style.position = "fixed";
+        overlay.style.top = "0";
+        overlay.style.left = "0";
+        overlay.style.width = "100vw";
+        overlay.style.height = "100vh";
+        overlay.style.backgroundColor = "rgba(15, 23, 42, 0.6)";
+        overlay.style.backdropFilter = "blur(4px)";
+        overlay.style.zIndex = "1000";
+        overlay.style.display = "flex";
+        overlay.style.alignItems = "center";
+        overlay.style.justifyContent = "center";
+        overlay.style.opacity = "0";
+        overlay.style.transition = "opacity 0.3s ease";
+
+        const content = document.createElement("div");
+        content.className = "shadow-card";
+        content.style.backgroundColor = "var(--bg-secondary)";
+        content.style.padding = "32px";
+        content.style.borderRadius = "var(--radius-lg)";
+        content.style.maxWidth = "450px";
+        content.style.width = "90%";
+        content.style.position = "relative";
+        content.style.transform = "translateY(-20px)";
+        content.style.transition = "transform 0.3s ease";
+
+        content.innerHTML = `
+          <button class="modal-close-btn" style="position: absolute; top: 16px; right: 16px; color: var(--text-light); cursor: pointer;"><i data-lucide="x"></i></button>
+          <h3 style="margin-bottom: 20px; font-size: 1.35rem; display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="credit-card" style="color: var(--primary);"></i> ${id ? "Edit Transaction" : "Add Transaction"}
+          </h3>
+          <form id="expense-modal-form" style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <label style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Description</label>
+              <input type="text" id="exp-title-input" value="${title}" placeholder="e.g. Cinnamon Lodge" required style="border: 1px solid var(--border-light); padding: 10px; border-radius: var(--radius-sm); font-size: 0.9rem;">
+            </div>
+            
+            <div style="display: flex; gap: 12px;">
+              <div style="display: flex; flex-direction: column; gap: 4px; flex-grow: 1;">
+                <label style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Category</label>
+                <select id="exp-cat-select" style="border: 1px solid var(--border-light); padding: 10px; border-radius: var(--radius-sm); font-size: 0.9rem; background-color: var(--bg-primary);">
+                  <option value="accommodation" ${category === "accommodation" ? "selected" : ""}>Hotel / Stay</option>
+                  <option value="dining" ${category === "dining" ? "selected" : ""}>Dining</option>
+                  <option value="transport" ${category === "transport" ? "selected" : ""}>Local Transport</option>
+                  <option value="entrance" ${category === "entrance" ? "selected" : ""}>Entrance Fees</option>
+                  <option value="activity" ${category === "activity" ? "selected" : ""}>Activity / Tour</option>
+                </select>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 4px; width: 140px;">
+                <label style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Amount (LKR)</label>
+                <input type="number" id="exp-val-input" value="${val}" placeholder="LKR" required style="border: 1px solid var(--border-light); padding: 10px; border-radius: var(--radius-sm); font-size: 0.9rem;">
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <label style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Date / Duration</label>
+              <input type="text" id="exp-date-input" value="${date || 'Nov 17'}" placeholder="e.g. Nov 12 - Nov 15" required style="border: 1px solid var(--border-light); padding: 10px; border-radius: var(--radius-sm); font-size: 0.9rem;">
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">${id ? "Update Transaction" : "Add Transaction"}</button>
+          </form>
+        `;
+
+        document.body.appendChild(overlay);
+        overlay.appendChild(content);
+        if (typeof lucide !== "undefined") lucide.createIcons();
+
+        setTimeout(() => {
+          overlay.style.opacity = "1";
+          content.style.transform = "translateY(0)";
+        }, 50);
+
+        const closeModal = () => {
+          overlay.style.opacity = "0";
+          content.style.transform = "translateY(-20px)";
+          setTimeout(() => overlay.remove(), 300);
+        };
+
+        content.querySelector(".modal-close-btn").addEventListener("click", closeModal);
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) closeModal();
+        });
+
+        content.querySelector("form").addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const newTitle = document.getElementById("exp-title-input").value;
+          const newCat = document.getElementById("exp-cat-select").value;
+          const newVal = parseFloat(document.getElementById("exp-val-input").value) || 0;
+          const newDate = document.getElementById("exp-date-input").value;
+
+          // Resolve visual category details
+          let badgeClass = "badge-accommodation";
+          let badgeText = "Hotel";
+          let imgSrc = "https://images.unsplash.com/photo-1546548970-71785318a17b?auto=format&fit=crop&w=100&q=80"; // default stay
+
+          if (newCat === "dining") {
+            badgeClass = "badge-dining";
+            badgeText = "Dining";
+            imgSrc = "assets/sri_lankan_lunch.png";
+          } else if (newCat === "transport") {
+            badgeClass = "badge-transport";
+            badgeText = "Transport";
+            imgSrc = "assets/electric_tuktuk.png";
+          } else if (newCat === "entrance") {
+            badgeClass = "badge-entrance";
+            badgeText = "Entrance";
+            imgSrc = "assets/sigiriya_sunrise.png";
+          } else if (newCat === "activity") {
+            badgeClass = "badge-activity";
+            badgeText = "Activity";
+            imgSrc = "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=100&q=80"; // Safari
+          }
+
+          if (editRowId) {
+            // EDITING existing row
+            const targetRow = document.querySelector(`.expense-row[data-id="${editRowId}"]`);
+            if (targetRow) {
+              targetRow.setAttribute("data-category", newCat);
+              targetRow.setAttribute("data-val", newVal);
+              
+              targetRow.querySelector(".expense-title").textContent = newTitle;
+              targetRow.querySelector(".expense-date").textContent = newDate;
+              targetRow.querySelector(".expense-img").src = imgSrc;
+              
+              const badge = targetRow.querySelector(".expense-category-badge");
+              badge.className = `expense-category-badge ${badgeClass}`;
+              badge.textContent = badgeText;
+              
+              targetRow.querySelector(".expense-amount-col").innerHTML = `${newVal.toLocaleString()} LKR`;
+            }
+          } else {
+            // ADDING new row
+            const newId = Date.now().toString();
+            const newRow = document.createElement("div");
+            newRow.className = "expense-row";
+            newRow.setAttribute("data-id", newId);
+            newRow.setAttribute("data-category", newCat);
+            newRow.setAttribute("data-val", newVal);
+            newRow.style.opacity = "0";
+            newRow.style.transform = "translateY(10px)";
+            newRow.style.transition = "all 0.3s ease";
+
+            newRow.innerHTML = `
+              <div class="expense-desc-col">
+                <img src="${imgSrc}" alt="${newTitle}" class="expense-img">
+                <div>
+                  <div class="expense-title">${newTitle}</div>
+                  <div class="expense-date">${newDate}</div>
+                </div>
+              </div>
+              <div>
+                <span class="expense-category-badge ${badgeClass}">${badgeText}</span>
+              </div>
+              <div class="expense-amount-col">
+                ${newVal.toLocaleString()} LKR
+              </div>
+              <div class="expense-actions-col">
+                <i data-lucide="edit-3" class="action-icon-btn action-edit-btn" style="width: 18px; height: 18px;"></i>
+                <i data-lucide="trash-2" class="action-icon-btn action-delete-btn" style="width: 18px; height: 18px;"></i>
+              </div>
+            `;
+
+            listContainer.insertBefore(newRow, listContainer.firstChild);
+            
+            // animate entry
+            setTimeout(() => {
+              newRow.style.opacity = "1";
+              newRow.style.transform = "translateY(0)";
+            }, 50);
+          }
+
+          if (typeof lucide !== "undefined") lucide.createIcons();
+          recalculateBudget();
+          closeModal();
+        });
+      };
+    }
+  </script>
+</body>
+</html>

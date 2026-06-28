@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traveler Planner - Enchanted Island: Heritage & Highlands</title>
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Injected Header -->
+  <header></header>
+
+  <div class="container">
+    <div class="planner-layout">
+      
+      <!-- Left Sidebar: Refine Journey -->
+      <aside class="planner-sidebar">
+        <div class="sidebar-title">
+          <i data-lucide="sliders-horizontal" style="color: var(--primary);"></i>
+          <h3>Refine Journey</h3>
+        </div>
+        
+        <!-- Atmosphere Group -->
+        <div class="sidebar-group">
+          <h4>Atmosphere</h4>
+          <div class="filter-tags">
+            <div class="filter-tag selected">Wildlife Safari</div>
+            <div class="filter-tag">Ayurveda & Wellness</div>
+            <div class="filter-tag">Surfing Vibes</div>
+          </div>
+        </div>
+        
+        <!-- Pace Group -->
+        <div class="sidebar-group">
+          <div class="slider-container">
+            <div class="slider-labels">
+              <h4>Pace</h4>
+              <span class="value">Moderate</span>
+            </div>
+            <input type="range" class="range-slider" min="0" max="2" value="1" step="1">
+            <div class="slider-ticks">
+              <span>Relaxed</span>
+              <span>Moderate</span>
+              <span>Intense</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Transport Group -->
+        <div class="sidebar-group">
+          <h4>Primary Transport</h4>
+          <div class="transport-selector">
+            <button class="transport-btn selected">
+              <i data-lucide="car"></i>
+              <span>Tuk-Tuk</span>
+            </button>
+            <button class="transport-btn">
+              <i data-lucide="train"></i>
+              <span>Scenic Rail</span>
+            </button>
+            <button class="transport-btn">
+              <i data-lucide="plane"></i>
+              <span>Seaplane</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Regenerate Itinerary button -->
+        <button class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+          <i data-lucide="sparkles"></i> Regenerate Itinerary
+        </button>
+      </aside>
+
+      <!-- Right Main Panel: Itinerary Details -->
+      <main class="planner-content">
+        <div class="planner-header-flex">
+          <div>
+            <h2>Enchanted Island: Heritage & Highlands</h2>
+            <p class="planner-meta">
+              Curated for <strong>92% match</strong> to your preferences.
+            </p>
+          </div>
+          <button class="btn btn-secondary">
+            <i data-lucide="share-2"></i> Share Itinerary
+          </button>
+        </div>
+
+        <!-- Timeline container -->
+        <div class="timeline">
+          
+          <!-- Day 1 -->
+          <div class="timeline-day">
+            <h3>Day 1: Arrival & Ancient Wonders</h3>
+            
+            <div class="itinerary-cards">
+              <!-- Card 1: Sigiriya Lion Rock -->
+              <div class="itinerary-card" data-transport="tuk-tuk" data-pace="1">
+                <div class="card-img-container">
+                  <img src="assets/sigiriya_sunrise.png" alt="Sigiriya Sunrise Ascent">
+                </div>
+                <div class="card-body">
+                  <div>
+                    <div class="card-header-info">
+                      <span class="card-time">09:00 AM</span>
+                      <button class="like-btn"><i data-lucide="heart" style="width: 18px; height: 18px;"></i></button>
+                    </div>
+                    <h4>Sunrise Ascent at Sigiriya Lion Rock</h4>
+                    <p>Scale the ancient "Lion Rock" fortress for breathtaking panoramic views of the cultural triangle at sunrise. Witness the sophisticated ancient water gardens and structural ruins.</p>
+                  </div>
+                  <div class="card-footer">
+                    <div style="display: flex; gap: 16px;">
+                      <span class="card-meta-item"><i data-lucide="sun" style="width: 14px; height: 14px;"></i> 78°F</span>
+                      <span class="card-meta-item"><i data-lucide="dollar-sign" style="width: 14px; height: 14px;"></i>$$</span>
+                    </div>
+                    <a href="#" class="details-link">Details <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2: Traditional Rice & Curry Lunch -->
+              <div class="itinerary-card" data-transport="tuk-tuk" data-pace="0">
+                <div class="card-img-container">
+                  <img src="assets/sri_lankan_lunch.png" alt="Sri Lankan Rice & Curry">
+                </div>
+                <div class="card-body">
+                  <div>
+                    <div class="card-header-info">
+                      <span class="card-time">01:30 PM</span>
+                      <button class="like-btn"><i data-lucide="heart" style="width: 18px; height: 18px;"></i></button>
+                    </div>
+                    <h4>Traditional Sri Lankan Rice & Curry Lunch</h4>
+                    <p>Savor an authentic feast of over ten different curries, from spicy dhal to creamy beetroot, served with red heirloom rice in a tranquil garden setting.</p>
+                  </div>
+                  <div class="card-footer">
+                    <div style="display: flex; gap: 16px;">
+                      <span class="card-meta-item"><i data-lucide="utensils" style="width: 14px; height: 14px;"></i> Local Experience</span>
+                      <span class="card-meta-item"><i data-lucide="dollar-sign" style="width: 14px; height: 14px;"></i>$$</span>
+                    </div>
+                    <a href="#" class="details-link">Details <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 5: Seaplane Flight (New) -->
+              <div class="itinerary-card" data-transport="plane" data-pace="2">
+                <div class="card-img-container">
+                  <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=800&q=80" alt="Castlereagh Reservoir Seaplane">
+                </div>
+                <div class="card-body">
+                  <div>
+                    <div class="card-header-info">
+                      <span class="card-time">11:00 AM</span>
+                      <button class="like-btn"><i data-lucide="heart" style="width: 18px; height: 18px;"></i></button>
+                    </div>
+                    <h4>Luxury Seaplane Transfer to Castlereagh</h4>
+                    <p>Soar over central tea country and Cascading waterfalls. Land directly on Castlereagh Reservoir for an intense, fast-paced travel connection.</p>
+                  </div>
+                  <div class="card-footer">
+                    <div style="display: flex; gap: 16px;">
+                      <span class="card-meta-item"><i data-lucide="plane" style="width: 14px; height: 14px;"></i> Express Flight</span>
+                      <span class="card-meta-item"><i data-lucide="dollar-sign" style="width: 14px; height: 14px;"></i>$$$</span>
+                    </div>
+                    <a href="#" class="details-link">Details <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day 2 -->
+          <div class="timeline-day day-locked">
+            <h3>Day 2: Misty Highlands & Tea Estates</h3>
+            
+            <!-- Unlock Next Day Widget -->
+            <div class="unlock-widget" id="unlock-day-2-btn">
+              <div class="unlock-icon flex-center">
+                <i data-lucide="plus"></i>
+              </div>
+              <h4>Unlock Next Day</h4>
+              <p>Ready to see your customized Day 2 itinerary?</p>
+            </div>
+
+            <!-- Day 2 Cards (Initially Hidden, animated in via JS) -->
+            <div class="itinerary-cards hidden-itinerary" id="day-2-itinerary">
+              <!-- Card 3: Scenic Train Ride to Ella -->
+              <div class="itinerary-card" data-transport="train" data-pace="1">
+                <div class="card-img-container">
+                  <img src="https://images.unsplash.com/photo-1543731068-7e0f5beff43a?auto=format&fit=crop&w=800&q=80" alt="Scenic Train Ride to Ella">
+                </div>
+                <div class="card-body">
+                  <div>
+                    <div class="card-header-info">
+                      <span class="card-time">08:30 AM</span>
+                      <button class="like-btn"><i data-lucide="heart" style="width: 18px; height: 18px;"></i></button>
+                    </div>
+                    <h4>Scenic Train Ride from Kandy to Ella</h4>
+                    <p>Board the legendary blue train through Sri Lanka's central highlands. Wind past misty valleys, cascading waterfalls, and infinite green tea plantations.</p>
+                  </div>
+                  <div class="card-footer">
+                    <div style="display: flex; gap: 16px;">
+                      <span class="card-meta-item"><i data-lucide="landmark" style="width: 14px; height: 14px;"></i> Scenic Route</span>
+                      <span class="card-meta-item"><i data-lucide="dollar-sign" style="width: 14px; height: 14px;"></i>$$</span>
+                    </div>
+                    <a href="#" class="details-link">Details <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 4: Tea Estate Tour -->
+              <div class="itinerary-card" data-transport="train" data-pace="0">
+                <div class="card-img-container">
+                  <img src="https://images.unsplash.com/photo-1555899434-94d1368aa7af?auto=format&fit=crop&w=800&q=80" alt="Tea Factory Tour">
+                </div>
+                <div class="card-body">
+                  <div>
+                    <div class="card-header-info">
+                      <span class="card-time">02:30 PM</span>
+                      <button class="like-btn"><i data-lucide="heart" style="width: 18px; height: 18px;"></i></button>
+                    </div>
+                    <h4>Artisanal Tea Estate & Factory Tour</h4>
+                    <p>Learn the fine art of tea plucking and processing at a historic estate. Taste various grades of pure Ceylon tea led by a master tea taster.</p>
+                  </div>
+                  <div class="card-footer">
+                    <div style="display: flex; gap: 16px;">
+                      <span class="card-meta-item"><i data-lucide="leaf" style="width: 14px; height: 14px;"></i> Cultural Tour</span>
+                      <span class="card-meta-item"><i data-lucide="dollar-sign" style="width: 14px; height: 14px;"></i>$$</span>
+                    </div>
+                    <a href="#" class="details-link">Details <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Injected Footer -->
+  <footer></footer>
+
+  <!-- Shared & Interaction Scripts -->
+  <script src="js/shared.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traveler Help Center - Sri Lanka Support</title>
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Injected Header -->
+  <header></header>
+
+  <!-- Help Hero Section -->
+  <section class="help-hero">
+    <div class="container">
+      <h1>How can we help you explore Sri Lanka?</h1>
+      <p>From Sigiriya's heights to the waves of Mirissa, find everything you need for a safe and seamless journey.</p>
+      
+      <div class="help-search-container">
+        <form class="help-search-bar" onsubmit="event.preventDefault();">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search for bookings, visas, train schedules..." required>
+          <button type="submit" class="btn btn-primary" style="padding: 10px 24px;">Search</button>
+        </form>
+        
+        <div class="help-tags-list">
+          <span class="label">Popular:</span>
+          <span class="help-tag">Train Bookings</span>
+          <span class="help-tag">Visa Extensions</span>
+          <span class="help-tag">Safety Tips</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container" style="padding-top: 60px; padding-bottom: 60px;">
+    <!-- Category Grid -->
+    <div class="grid-4" style="margin-bottom: 60px;">
+      <!-- Category 1 -->
+      <div class="category-card">
+        <div class="category-icon flex-center">
+          <i data-lucide="ticket"></i>
+        </div>
+        <h3>Booking</h3>
+        <p>Manage flights, hotels, and local tours seamlessly.</p>
+        <div class="category-links">
+          <a href="#">Cancel a reservation</a>
+          <a href="#">Modify travel dates</a>
+        </div>
+      </div>
+
+      <!-- Category 2 -->
+      <div class="category-card">
+        <div class="category-icon flex-center">
+          <i data-lucide="train"></i>
+        </div>
+        <h3>Transport</h3>
+        <p>Train schedules, tuk-tuk guides, and private drivers.</p>
+        <div class="category-links">
+          <a href="#">Train seat classes</a>
+          <a href="#">Airport transfers</a>
+        </div>
+      </div>
+
+      <!-- Category 3 -->
+      <div class="category-card">
+        <div class="category-icon flex-center">
+          <i data-lucide="shield-check"></i>
+        </div>
+        <h3>Safety</h3>
+        <p>Emergency contacts, health advisories, and local laws.</p>
+        <div class="category-links">
+          <a href="#">Tourist Police</a>
+          <a href="#">Hospital directory</a>
+        </div>
+      </div>
+
+      <!-- Category 4 -->
+      <div class="category-card">
+        <div class="category-icon flex-center">
+          <i data-lucide="credit-card"></i>
+        </div>
+        <h3>Payments</h3>
+        <p>Refund policies, currency exchange, and Smart Wallet.</p>
+        <div class="category-links">
+          <a href="#">Refund status</a>
+          <a href="#">Currency FAQs</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQs and Sidebar Grid -->
+    <div class="faq-section-grid">
+      <!-- Left Column: Accordion list -->
+      <div>
+        <div class="faq-header">
+          <h2>Frequently Asked Questions</h2>
+          <a href="#" class="view-all-link">View all <i data-lucide="arrow-right" style="width: 14px;"></i></a>
+        </div>
+        
+        <div class="faq-list">
+          <!-- Item 1 -->
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <h4>What is the best way to travel from Colombo to Ella?</h4>
+              <i data-lucide="chevron-down" class="accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+              <p>The scenic train ride is highly recommended, winding through tea plantations and mountain mist. Tickets can be booked online in advance through our Planner page or directly at the Colombo Fort station.</p>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <h4>How do I apply for an ETA tourist visa?</h4>
+              <i data-lucide="chevron-down" class="accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+              <p>You can apply online via the official Electronic Travel Authorization (ETA) website. It typically processes within 24-48 hours and is valid for a 30-day stay from date of entry.</p>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <h4>Can I get a refund if my train is delayed?</h4>
+              <i data-lucide="chevron-down" class="accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+              <p>Yes, refunds are eligible for cancellations or delays exceeding 2 hours. You can file a claim via our Support dashboard or present your physical ticket at any railway station ticket window.</p>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <h4>Are ATMs widely available in the Cultural Triangle?</h4>
+              <i data-lucide="chevron-down" class="accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+              <p>Yes, commercial towns like Dambulla, Sigiriya, and Anuradhapura have operational ATMs. However, we recommend carrying local cash (LKR) for village shops, heritage entry fees, and local tuk-tuks.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Itinerary CTA Card underneath FAQ list -->
+        <div class="destination-card-main" style="height: 250px; margin-top: 40px; justify-content: center; padding: 30px;">
+          <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80" alt="Sri Lanka Coastline">
+          <div class="card-content-main" style="max-width: 450px;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 6px;">Planning a custom itinerary?</h3>
+            <p style="font-size: 0.85rem; margin-bottom: 16px; color: rgba(255, 255, 255, 0.9);">Our travel experts can help you design a journey as unique as you are.</p>
+            <a href="planner.html" class="btn btn-secondary" style="color: var(--primary); padding: 10px 20px;">Start Planning</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Support Sidebar Card -->
+      <aside class="support-sidebar">
+        <h3>Still need help?</h3>
+        <p>Our support team is available 24/7 to assist with your journey across the island.</p>
+        
+        <div class="support-channels">
+          <!-- Chat -->
+          <div class="support-btn-link chat-active">
+            <i data-lucide="message-square" class="channel-icon"></i>
+            <div class="channel-info">
+              <h4>Live Chat</h4>
+              <p>Wait time: &lt; 2 mins</p>
+            </div>
+            <i data-lucide="arrow-right" class="arrow-icon"></i>
+          </div>
+
+          <!-- Email -->
+          <div class="support-btn-link">
+            <i data-lucide="mail" class="channel-icon"></i>
+            <div class="channel-info">
+              <h4>Email Support</h4>
+              <p>Response within 12h</p>
+            </div>
+            <i data-lucide="arrow-right" class="arrow-icon"></i>
+          </div>
+
+          <!-- Call -->
+          <div class="support-btn-link">
+            <i data-lucide="phone" class="channel-icon"></i>
+            <div class="channel-info">
+              <h4>Call Us</h4>
+              <p>+94 11 234 5678</p>
+            </div>
+            <i data-lucide="arrow-right" class="arrow-icon"></i>
+          </div>
+        </div>
+
+        <div class="support-socials">
+          <p>Follow us for live travel updates</p>
+          <div class="support-socials-icons">
+            <a href="#" class="social-icon" style="width: 36px; height: 36px;"><i data-lucide="share-2" style="width: 16px;"></i></a>
+            <a href="#" class="social-icon" style="width: 36px; height: 36px;"><i data-lucide="globe" style="width: 16px;"></i></a>
+            <a href="#" class="social-icon" style="width: 36px; height: 36px;"><i data-lucide="rss" style="width: 16px;"></i></a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Injected Footer -->
+  <footer></footer>
+
+  <!-- Shared & Interaction Scripts -->
+  <script src="js/shared.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traveler - Discover the Wonder of Sri Lanka</title>
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Injected Header -->
+  <header></header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <span class="hero-subtitle">Smart Travel Companion</span>
+      <h1>Discover the <span class="gradient">Wonder</span> of Sri Lanka</h1>
+      <p class="hero-desc">
+        Experience the pearl of the Indian Ocean with the technical reliability of a smart assistant. Plan, budget, and explore our tropical paradise with ease.
+      </p>
+    </div>
+  </section>
+
+  <!-- Search Widget Container -->
+  <div class="search-widget-container">
+    <div class="search-widget">
+      <div class="search-tab-header">
+        <i data-lucide="search"></i>
+        <span>Start Your Discovery</span>
+      </div>
+      <form class="search-grid" onsubmit="event.preventDefault();">
+        <div class="search-field">
+          <label for="destination">Destinations</label>
+          <input type="text" id="destination" placeholder="Where to?" required>
+        </div>
+        <div class="search-field">
+          <label for="dates">Dates</label>
+          <input type="text" id="dates" placeholder="Select dates" onfocus="(this.type='date')" onblur="(this.type='text')">
+        </div>
+        <div class="search-field">
+          <label for="guests">Guests</label>
+          <select id="guests">
+            <option>2 Adults, 1 Child</option>
+            <option>1 Adult</option>
+            <option>2 Adults</option>
+            <option>3+ Adults</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          Explore Now <i data-lucide="arrow-right"></i>
+        </button>
+      </form>
+      
+      <div class="search-tags">
+        <span class="label">Popular:</span>
+        <span class="search-tag">Sigiriya</span>
+        <span class="search-tag">Ella</span>
+        <span class="search-tag">Galle</span>
+        <span class="search-tag">Kandy</span>
+        <span class="search-tag">+ Add Interest</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container grid-3">
+      <div class="stat-card">
+        <div class="stat-icon flex-center">
+          <i data-lucide="globe"></i>
+        </div>
+        <div class="stat-number">8+</div>
+        <div class="stat-label">UNESCO World Heritage Sites</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon flex-center">
+          <i data-lucide="trees"></i>
+        </div>
+        <div class="stat-number">26</div>
+        <div class="stat-label">National Parks</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon flex-center">
+          <i data-lucide="users"></i>
+        </div>
+        <div class="stat-number">1.9M</div>
+        <div class="stat-label">Annual Visitors</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trending Destinations Section -->
+  <section id="destinations" class="section-padding">
+    <div class="container">
+      <div class="trending-header flex-between">
+        <div>
+          <h2>Uncover Trending Destinations</h2>
+          <p>Hand-picked experiences that are currently popular with travelers.</p>
+        </div>
+        <a href="#" class="view-all-link">
+          View all destinations <i data-lucide="chevron-right"></i>
+        </a>
+      </div>
+      
+      <div class="trending-grid">
+        <!-- Main Highlight Card (Sigiriya) -->
+        <div class="destination-card-main">
+          <img src="assets/sigiriya_sunrise.png" alt="Sigiriya Lion Rock">
+          <div class="card-content-main">
+            <div class="card-tags">
+              <span class="card-tag card-tag-primary">Cultural</span>
+              <span class="card-tag card-tag-accent">Historical</span>
+            </div>
+            <h3>The Ancient Majesty of Sigiriya</h3>
+            <p>Ascend the legendary lion fortress, witness breathtaking panoramic views, and explore the sophisticated ancient water gardens below.</p>
+            <a href="planner.html" class="btn btn-secondary">
+              Explore Packages <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Right Column Cards -->
+        <div class="trending-right">
+          <!-- Kandy Card -->
+          <div class="destination-card-sub">
+            <img src="https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=800&q=80" alt="Kandy Temple">
+            <div class="card-content-sub">
+              <span class="category">Cultural</span>
+              <h3>Spiritual Serenity in Kandy</h3>
+            </div>
+          </div>
+          
+          <!-- Galle Card -->
+          <div class="destination-card-sub">
+            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80" alt="Galle Fort">
+            <div class="card-content-sub">
+              <span class="category">Historical</span>
+              <h3>Colonial Charm at Galle Fort</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Injected Footer -->
+  <footer></footer>
+
+  <!-- Shared & Interaction Scripts -->
+  <script src="js/shared.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
