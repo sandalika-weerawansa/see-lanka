@@ -345,20 +345,15 @@ footer {
 }
 
 .social-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-full);
-  background-color: var(--bg-tertiary);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-muted);
+  color: var(--text-main);
   transition: var(--transition-fast);
 }
 
 .social-icon:hover {
-  background-color: var(--primary);
-  color: #ffffff;
+  color: var(--primary);
   transform: scale(1.1);
 }
 

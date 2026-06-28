@@ -88,9 +88,21 @@ function injectFooter() {
             Your ultimate companion for seamless travel planning, budget tracking, and discovering hidden gems around the globe.
           </p>
           <div class="social-links">
-            <a href="#" class="social-icon"><i data-lucide="music-2"></i></a>
-            <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
-            <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
+            <a href="#" class="social-icon" aria-label="TikTok">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" style="width: 20px; height: 20px;">
+                <path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.38v78.48a84.07,84.07,0,1,0,40.3,71V0h78.34a108.94,108.94,0,0,0,10.63,45.74,109,109,0,0,0,76.54,62.8v78.34A109,109,0,0,0,448,209.91Z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" style="width: 20px; height: 20px;">
+                <path d="M224,202.66A74.34,74.34,0,1,0,298.34,277,74.34,74.34,0,0,0,224,202.66Zm0,122A47.66,47.66,0,1,1,271.66,277,47.66,47.66,0,0,1,224,324.66ZM348,170.34a27.66,27.66,0,1,1-27.66-27.66A27.66,27.66,0,0,1,348,170.34ZM448,140.34c0-54-15.66-96.66-55.34-136.34S298.66,0,244.66,0h-41.32C149.34,0,106.68,15.66,67,55.34S11.68,149.66,11.68,203.66v41.32c0,54,15.66,96.66,55.34,136.34S149.34,488,203.34,488h41.32c54,0,96.66-15.66,136.34-55.34S436.34,338.34,436.34,284.34V243ZM392.34,328c-10.66,26.68-31.32,47.34-58,58S280.34,399,224,399s-91-3.66-110.34-13-47.34-31.32-58-58S42.34,280.34,42.34,224s3.66-91,13-110.34,31.32-47.34,58-58S167.66,43,224,43s91,3.66,110.34,13,47.34,31.32,58,58S405.66,167.66,405.66,224,402,315,392.34,328Z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" style="width: 20px; height: 20px;">
+                <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.38 19.12-40.38 38.73V256h68.75l-11 71.69h-57.75V501C413.31 482.38 504 379.78 504 256z"/>
+              </svg>
+            </a>
           </div>
         </div>
         
